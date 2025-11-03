@@ -1,5 +1,7 @@
 package com.example.batch;
 
+import com.example.batch.customer.CustomerRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,7 +12,7 @@ public class DormantBatchJob {
 
     public DormantBatchJob(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-        this.emailProvider = EmailProvider.Fake();
+        this.emailProvider = new EmailProvider.Fake();
     }
 
     public void excute() {

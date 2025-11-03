@@ -22,7 +22,7 @@ public class Customer {
 
     private String name;
 
-    private Stirng email;
+    private String email;
 
     private LocalDateTime createAt;
 
@@ -30,7 +30,7 @@ public class Customer {
 
     private Status status;
 
-    public Customer(String name, Stirng email) {
+    public Customer(String name, String email) {
         this.name = name;
         this.email = email;
         this.createAt = LocalDateTime.now();
