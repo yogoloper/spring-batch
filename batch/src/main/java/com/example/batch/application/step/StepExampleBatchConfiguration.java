@@ -1,9 +1,6 @@
 package com.example.batch.application.step;
 
-import com.example.batch.batch.Job;
-import com.example.batch.batch.Step;
-import com.example.batch.batch.StepJob;
-import com.example.batch.batch.TaskLet;
+import com.example.batch.batch.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,8 +17,11 @@ public class StepExampleBatchConfiguration {
             Step step2,
             Step step3
     ) {
-        final List<Step> steps =  Arrays.asList(step1, step2, step3);
-        return new StepJob(steps, null);
+        return new StepJobBuilder()
+                .start(step1)
+                .next(step2)
+                .next(step3)
+                .build();
     }
 
     @Bean
