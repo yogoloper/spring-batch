@@ -3,7 +3,7 @@ package com.example.batch.batch;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SimpleTaskLet<I, O> implements Tasklet {
+public class SimpleTaskLet<I, O> implements TaskLet {
 
     private final ItemReader<I> itemReader;
     private final ItemProcessor<I, O> itemProcessor;

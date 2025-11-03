@@ -3,6 +3,7 @@ package com.example.batch;
 import com.example.batch.batch.BatchStatus;
 import com.example.batch.batch.Job;
 import com.example.batch.batch.JobExecution;
+import com.example.batch.batch.TaskLetJob;
 import com.example.batch.customer.Customer;
 import com.example.batch.customer.CustomerRepository;
 import org.junit.jupiter.api.Assertions;
@@ -103,7 +104,7 @@ class DormantBatchJobTest {
     @DisplayName("배치가 실패하면 BatchStatus는 FAILEDFMF 반환해야 한다.")
     void test4() {
         // given
-        final Job dormantBatchJob = new Job(null, null);
+        final Job dormantBatchJob = new TaskLetJob(null, null);
 
         // when
         final JobExecution result = dormantBatchJob.excute();
