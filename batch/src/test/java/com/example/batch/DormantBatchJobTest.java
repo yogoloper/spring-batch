@@ -103,7 +103,7 @@ class DormantBatchJobTest {
     @DisplayName("배치가 실패하면 BatchStatus는 FAILEDFMF 반환해야 한다.")
     void test4() {
         // given
-        final Job dormantBatchJob = new Job(null);
+        final Job dormantBatchJob = new Job(null, null);
 
         // when
         final JobExecution result = dormantBatchJob.excute();

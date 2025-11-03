@@ -4,15 +4,33 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-@Component
 public class Job {
 
     private final Tasklet tasklet;
     private final JobExecutionListener jobExecutionListener;
 
+    public Job(Tasklet tasklet) {
+        this(tasklet, null);
+    }
+
     public Job(Tasklet tasklet, JobExecutionListener jobExecutionListener) {
         this.tasklet = tasklet;
-        this.jobExecutionListener = jobExecutionListener;
+        if (jobExecutionListener == null) {
+            this.jobExecutionListener = new JobExecutionListener() {
+                @Override
+                public void beforeJob(JobExecution jobExecution) {
+
+                }
+
+                @Override
+                public void afterJob(JobExecution jobExecution) {
+
+                }
+            };
+        } else {
+            this.jobExecutionListener = jobExecutionListener;
+        }
+
     }
 
     public JobExecution excute() {

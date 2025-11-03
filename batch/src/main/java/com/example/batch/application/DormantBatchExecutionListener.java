@@ -10,7 +10,7 @@ public class DormantBatchExecutionListener implements JobExecutionListener {
 
     private final EmailProvider emailProvider;
 
-    public DormantBatchExecutionListener(EmailProvider emailProvider) {
+    public DormantBatchExecutionListener() {
         this.emailProvider = new EmailProvider.Fake();
     }
 
