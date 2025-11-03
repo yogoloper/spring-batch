@@ -1,6 +1,7 @@
 package com.example.batch;
 
 import com.example.batch.batch.BatchStatus;
+import com.example.batch.batch.Job;
 import com.example.batch.batch.JobExecution;
 import com.example.batch.customer.Customer;
 import com.example.batch.customer.CustomerRepository;

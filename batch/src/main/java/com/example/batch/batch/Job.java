@@ -1,17 +1,7 @@
-package com.example.batch;
+package com.example.batch.batch;
 
-import com.example.batch.batch.BatchStatus;
-import com.example.batch.batch.JobExecution;
-import com.example.batch.batch.JobExecutionListener;
-import com.example.batch.batch.Tasklet;
-import com.example.batch.customer.Customer;
-import com.example.batch.customer.CustomerRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
