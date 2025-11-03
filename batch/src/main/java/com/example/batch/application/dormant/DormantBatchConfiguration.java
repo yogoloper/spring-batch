@@ -23,19 +23,6 @@ public class DormantBatchConfiguration {
     }
 
     @Bean
-    public Step dormantBatchStep(
-            AllCustomerItemReader itemReader,
-            DormantBatchItemProcessor itemProcessor,
-            DormantBatchItemWriter itemWriter
-    ) {
-        return Step.builder()
-                .itemReader(itemReader)
-                .itemProcessor(itemProcessor)
-                .itemWriter(itemWriter)
-                .build();
-    }
-
-    @Bean
     public Step preDormantBatchStep(
             AllCustomerItemReader itemReader,
             PreDormantBatchItemProcessor itemProcessor,
@@ -48,5 +35,16 @@ public class DormantBatchConfiguration {
                 .build();
     }
 
-    // 휴면 전환 예정 1주일 전인 사람에게 이메일을 발송한다.
+    @Bean
+    public Step dormantBatchStep(
+            AllCustomerItemReader itemReader,
+            DormantBatchItemProcessor itemProcessor,
+            DormantBatchItemWriter itemWriter
+    ) {
+        return Step.builder()
+                .itemReader(itemReader)
+                .itemProcessor(itemProcessor)
+                .itemWriter(itemWriter)
+                .build();
+    }
 }
