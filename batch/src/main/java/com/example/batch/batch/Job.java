@@ -15,22 +15,17 @@ public class Job {
 
     public Job(Tasklet tasklet, JobExecutionListener jobExecutionListener) {
         this.tasklet = tasklet;
-        if (jobExecutionListener == null) {
-            this.jobExecutionListener = new JobExecutionListener() {
-                @Override
-                public void beforeJob(JobExecution jobExecution) {
+        this.jobExecutionListener = new JobExecutionListener() {
+            @Override
+            public void beforeJob(JobExecution jobExecution) {
 
-                }
+            }
 
-                @Override
-                public void afterJob(JobExecution jobExecution) {
+            @Override
+            public void afterJob(JobExecution jobExecution) {
 
-                }
-            };
-        } else {
-            this.jobExecutionListener = jobExecutionListener;
-        }
-
+            }
+        };
     }
 
     public JobExecution excute() {
