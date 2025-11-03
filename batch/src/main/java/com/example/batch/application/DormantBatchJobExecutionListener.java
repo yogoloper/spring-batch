@@ -6,11 +6,11 @@ import com.example.batch.batch.JobExecutionListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DormantBatchExecutionListener implements JobExecutionListener {
+public class DormantBatchJobExecutionListener implements JobExecutionListener {
 
     private final EmailProvider emailProvider;
 
-    public DormantBatchExecutionListener() {
+    public DormantBatchJobExecutionListener() {
         this.emailProvider = new EmailProvider.Fake();
     }
 
