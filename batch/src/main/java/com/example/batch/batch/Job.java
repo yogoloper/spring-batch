@@ -1,5 +1,6 @@
 package com.example.batch.batch;
 
+import lombok.Builder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,11 @@ public class Job {
 
     public Job(Tasklet tasklet) {
         this(tasklet, null);
+    }
+
+    @Builder
+    public Job(ItemReader<?> itemReader, ItemProcessor<?, ?> itemProcessor, ItemWriter<?> itemWriter, JobExecutionListener jobExecutionListener) {
+        this(new SimpleTaskLet(itemReader, itemProcessor, itemWriter), jobExecutionListener);
     }
 
     public Job(Tasklet tasklet, JobExecutionListener jobExecutionListener) {

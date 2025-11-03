@@ -14,17 +14,14 @@ public class DormantBatchConfiguration {
             DormantBatchItemReader itemReader,
             DormantBatchItemProcessor itemProcessor,
             DormantBatchItemWriter itemWriter,
-            DormantBatchJobExecutionListener dormantBatchExecutionListener
+            DormantBatchJobExecutionListener listener
     ) {
-        final SimpleTaskLet<Customer, Customer> taskLet = new SimpleTaskLet<> ( // 비즈니스 작업 생성
-                itemReader,
-                itemProcessor,
-                itemWriter
-        );
 
-        return new Job(
-                taskLet,
-                dormantBatchExecutionListener
-        );
+        return Job.builder()
+                .itemReader(itemReader)
+                .itemProcessor(itemProcessor)
+                .itemWriter(itemWriter)
+                .jobExecutionListener(listener)
+                .build();
     }
 }
