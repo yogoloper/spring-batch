@@ -71,6 +71,8 @@ public class DormantBatchJob {
 
         jobExecution.setEndTime(LocalDateTime.now());
 
+        emailProvider.send("admin@gmail.com", "배치 완료 알림", "DormantBatchJob이 수행 되었습니다. status: " + jobExecution.getStatus());
+
         return jobExecution;
     }
 }
