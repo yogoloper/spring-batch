@@ -1,6 +1,6 @@
 package com.example.batch.batch;
 
-public interface Tasklet {
+public interface TaskLet {
 
     void excute();
 }
