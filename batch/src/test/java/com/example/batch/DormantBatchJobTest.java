@@ -14,8 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class DormantBatchJobTest {
 
@@ -23,7 +21,7 @@ class DormantBatchJobTest {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private DormantBatchJob dormantBatchJob;
+    private Job dormantBatchJob;
 
     @BeforeEach
     public void setup() {
@@ -104,7 +102,7 @@ class DormantBatchJobTest {
     @DisplayName("배치가 실패하면 BatchStatus는 FAILEDFMF 반환해야 한다.")
     void test4() {
         // given
-        final DormantBatchJob dormantBatchJob = new DormantBatchJob(null);
+        final Job dormantBatchJob = new Job(null);
 
         // when
         final JobExecution result = dormantBatchJob.excute();

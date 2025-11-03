@@ -1,39 +1,28 @@
-package com.example.batch;
+package com.example.batch.application;
 
-import com.example.batch.batch.BatchStatus;
-import com.example.batch.batch.JobExecution;
-import com.example.batch.customer.Customer;
+import com.example.batch.EmailProvider;
+import com.example.batch.batch.Tasklet;
 import com.example.batch.customer.CustomerRepository;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Component
-public class DormantBatchJob {
+public class DormantBatchTaskLet implements Tasklet {
 
     private final CustomerRepository customerRepository;
     private final EmailProvider emailProvider;
 
-    public DormantBatchJob(CustomerRepository customerRepository) {
+    public DormantBatchTaskLet(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
         this.emailProvider = new EmailProvider.Fake();
     }
 
-    public JobExecution excute() {
-
-        final JobExecution jobExecution = new JobExecution();
-        jobExecution.setStatus(BatchStatus.STARTING);
-        jobExecution.setStartTime(LocalDateTime.now());
+    @Override
+    public void excute() {
 
         int pageNo = 0;
 
-        try {
-            while (true) {
+        // 비즈니스 로직
+        while (true) {
 
                 // 1. 유저를 조회한다.
                 final PageRequest pageRequest = PageRequest.of(pageNo, 1, Sort.by("id").ascending());
@@ -64,15 +53,5 @@ public class DormantBatchJob {
                 // 4. 메일을 보낸다.
                 emailProvider.send(customer.getEmail(), "휴면 전환 안내메일 입니다.", "내용");
             }
-            jobExecution.setStatus(BatchStatus.COMPLETED);
-        } catch (Exception e) {
-            jobExecution.setStatus(BatchStatus.FAILED);
-        }
-
-        jobExecution.setEndTime(LocalDateTime.now());
-
-        emailProvider.send("admin@gmail.com", "배치 완료 알림", "DormantBatchJob이 수행 되었습니다. status: " + jobExecution.getStatus());
-
-        return jobExecution;
     }
 }
