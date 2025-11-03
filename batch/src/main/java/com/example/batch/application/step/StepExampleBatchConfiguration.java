@@ -4,10 +4,6 @@ import com.example.batch.batch.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.List;
-
 @Configuration
 public class StepExampleBatchConfiguration {
 
