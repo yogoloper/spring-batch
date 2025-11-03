@@ -1,8 +1,14 @@
 package com.example.batch;
 
+import com.example.batch.customer.Customer;
 import com.example.batch.customer.CustomerRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class DormantBatchJob {
@@ -16,12 +22,38 @@ public class DormantBatchJob {
     }
 
     public void excute() {
-        // 1. 유저를 조회한다.
+        int pageNo = 0;
 
-        // 2. 휴면 계정 대상을 추출 및 변환한다.
+        while (true) {
 
-        // 3. 휴면 계정으로 상태를 변경 한다.
+            // 1. 유저를 조회한다.
+            final PageRequest pageRequest = PageRequest.of(pageNo, 1, Sort.by("id").ascending());
+            final Page<Customer> page = customerRepository.findAll(pageRequest);
 
-        // 4. 메일을 보낸다.
+            final Customer customer;
+            if (page.isEmpty()) {
+                break;
+            } else {
+                pageNo++;
+                customer = page.getContent().get(0);
+            }
+
+            // 2. 휴면 계정 대상을 추출 및 변환한다.
+            final boolean isDormantTarget = LocalDate.now()
+                    .minusDays(365)
+                    .isAfter(customer.getLoginAt().toLocalDate());
+
+            if (isDormantTarget) {
+                customer.setStatus(Customer.Status.DORMANT);
+            } else {
+                continue;
+            }
+
+            // 3. 휴면 계정으로 상태를 변경 한다.
+            customerRepository.save(customer);
+
+            // 4. 메일을 보낸다.
+            emailProvider.send(customer.getEmail(), "휴면 전환 안내메일 입니다.", "내용");
+        }
     }
 }

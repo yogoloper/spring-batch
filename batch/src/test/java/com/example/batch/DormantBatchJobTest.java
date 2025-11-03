@@ -3,6 +3,7 @@ package com.example.batch;
 import com.example.batch.customer.Customer;
 import com.example.batch.customer.CustomerRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ class DormantBatchJobTest {
 
     @Autowired
     private DormantBatchJob dormantBatchJob;
+
+    @BeforeEach
+    public void setup() {
+        customerRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("로그인 시간이 1년을 경과한 고객이 3명이고, 1년 이내에 로그인한 고객이 다섯명이면 3명의 고객이 휴면전환 대상이다.")
