@@ -12,9 +12,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
 
-    private String age;
+    private Long age;
 
     private String region;
 

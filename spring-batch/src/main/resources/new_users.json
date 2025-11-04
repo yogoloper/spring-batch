@@ -1,0 +1,7 @@
+[
+ {"name":"홍","age":"20","region":"서울","telephone":"010-1111-2222"},
+ {"name":"길","age":"21","region":"부산","telephone":"010-1111-2223"},
+ {"name":"동","age":"22","region":"대전","telephone":"010-1111-2224"},
+ {"name":"이","age":"23","region":"대구","telephone":"010-1111-2225"},
+ {"name":"순","age":"24","region":"서울","telephone":"010-1111-2226"}
+]
